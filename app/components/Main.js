@@ -12,14 +12,10 @@ export default class Main extends Component{
 				<nav className="navbar navbar-expand-lg navbar-light bg-light">
 				    <ul className="navbar-nav">
 				      <li className="nav-item">
-				      	<Link to="/Search">
-				        	<a className="nav-link" href="#">Search Articles</a>
-				        </Link>
+				        	<Link to="/Search" className="nav-link" href="#">Search Articles</Link>
 				      </li>
 				      <li className="nav-item">
-				        <Link to="/Saved">
-				        	<a className="nav-link" href="#">Saved Articles</a>
-				        </Link>
+				        	<Link to="/Saved" className="nav-link" href="#">Saved Articles</Link>
 				      </li>
 				    </ul>
 				</nav>

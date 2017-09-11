@@ -25519,12 +25519,8 @@
 								{ className: "nav-item" },
 								_react2.default.createElement(
 									_reactRouter.Link,
-									{ to: "/Search" },
-									_react2.default.createElement(
-										"a",
-										{ className: "nav-link", href: "#" },
-										"Search Articles"
-									)
+									{ to: "/Search", className: "nav-link", href: "#" },
+									"Search Articles"
 								)
 							),
 							_react2.default.createElement(
@@ -25532,12 +25528,8 @@
 								{ className: "nav-item" },
 								_react2.default.createElement(
 									_reactRouter.Link,
-									{ to: "/Saved" },
-									_react2.default.createElement(
-										"a",
-										{ className: "nav-link", href: "#" },
-										"Saved Articles"
-									)
+									{ to: "/Saved", className: "nav-link", href: "#" },
+									"Saved Articles"
 								)
 							)
 						)
@@ -25824,29 +25816,32 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var saveArticle = function saveArticle(doc) {
-		return _helpers2.default.saveArticle(doc);
-	};
-
 	//export to router
-
 	var Results = function (_Component) {
 		_inherits(Results, _Component);
 
 		function Results() {
 			_classCallCheck(this, Results);
 
-			return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).apply(this, arguments));
+			return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this));
 		}
 
 		_createClass(Results, [{
+			key: "handleClick",
+			value: function handleClick(article) {
+				_helpers2.default.saveArticle(article).then(function (data) {
+					console.log(data);
+				}.bind(this));
+			}
+		}, {
 			key: "render",
 			value: function render() {
+				var _this2 = this;
+
 				//bring in search results prop from main
 				var results = this.props.searchResults;
 				//iterate through results array
 				var listResults = results.map(function (doc, i) {
-					var boundClick = saveArticle.bind(this, doc);
 					//asign key to index of item and assign h3 to headline str
 					return _react2.default.createElement(
 						"li",
@@ -25864,22 +25859,22 @@
 						),
 						_react2.default.createElement(
 							"a",
-							{ href: doc.web_url, target: "_blank", className: "badge badge-info" },
+							{ href: doc.web_url, target: "_blank", className: "badge badge-info float-left" },
 							"Learn More"
 						),
 						_react2.default.createElement(
 							"button",
-							{ type: "button", className: "btn btn-success float-right", onClick: boundClick },
+							{ type: "button", className: "btn btn-success float-right", onClick: _this2.handleClick.bind(_this2, doc) },
 							"Save"
 						)
 					);
 				});
 				return _react2.default.createElement(
 					"div",
-					{ className: "card" },
+					{ className: "panel panel-primary" },
 					_react2.default.createElement(
 						"div",
-						{ className: "card-header" },
+						{ className: "panel-heading" },
 						"Search Results"
 					),
 					_react2.default.createElement(
@@ -27503,11 +27498,11 @@
 		_createClass(Saved, [{
 			key: "componentDidMount",
 			value: function componentDidMount() {
-				var _this2 = this;
-
-				_helpers2.default.getArticles().then(function (data) {
-					return _this2.setState({ savedArticles: data });
-				});
+				_helpers2.default.getArticles().then(function (articles) {
+					this.setState({ savedArticles: articles.data });
+					console.log(articles.data);
+					console.log("savedArticles  :" + savedArticles);
+				}.bind(this));
 			}
 		}, {
 			key: "render",
@@ -27520,7 +27515,7 @@
 						_react2.default.createElement(
 							"h3",
 							null,
-							doc.headline.main
+							doc.title
 						),
 						_react2.default.createElement("br", null),
 						_react2.default.createElement(
@@ -27538,10 +27533,10 @@
 
 				return _react2.default.createElement(
 					"div",
-					{ className: "card" },
+					{ className: "panel panel-primary" },
 					_react2.default.createElement(
 						"div",
-						{ className: "card-header" },
+						{ className: "panel-heading" },
 						"Saved Articles"
 					),
 					_react2.default.createElement(

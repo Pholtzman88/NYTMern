@@ -11,7 +11,7 @@ export default class Search extends Component{
 			searchTerm: "",
 			startYear: "",
 			endYear: "",
-			searchResults: [],
+			searchResults: []
 		};
 		this.setSearch = this.setSearch.bind(this);
 	}

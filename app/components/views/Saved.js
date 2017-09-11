@@ -11,7 +11,11 @@ export default class Saved extends Component{
 	}
 
 	componentDidMount(){
-		helpers.getArticles().then(data => this.setState({savedArticles: data}))
+		helpers.getArticles().then(function(articles){
+		this.setState({savedArticles: articles.data});
+		console.log(articles.data);
+		console.log(`savedArticles  :${savedArticles}`);
+		}.bind(this))
 	}
 
 	render(){
@@ -19,7 +23,7 @@ export default class Saved extends Component{
 		const listResults = results.map(function(doc,i){
 			return(
 				<li className="list-group-item" key={i}>
-					<h3>{doc.headline.main}</h3>
+					<h3>{doc.title}</h3>
 					<br/>
 					<p>{doc.snippet}</p>
 					<a href={doc.web_url} target="_blank" className="badge badge-info">Learn More</a>
@@ -28,8 +32,8 @@ export default class Saved extends Component{
 		});
 
 		return(
-			<div className="card">
-				<div className="card-header">Saved Articles</div>
+			<div className="panel panel-primary">
+				<div className="panel-heading">Saved Articles</div>
 				<ul className="list-group list-group-flush">
 				{listResults}
 				</ul>
