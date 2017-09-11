@@ -15,7 +15,7 @@ app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 
 app.use(express.static('./public'));
 
-mongoose.connect('mongodb://localhost/nytarticles');
+mongoose.connect('mongodb://admin:admin1@ds133814.mlab.com:33814/nytarticles_db');
 var db = mongoose.connection;
 
 db.on('error', function(err){
